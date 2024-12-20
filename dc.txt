@@ -2,24 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-dynamic-form',
+  templateUrl: './dynamic-form.component.html',
+  styleUrls: ['./dynamic-form.component.css']
 })
-export class AppComponent implements OnInit {
+export class DynamicFormComponent implements OnInit {
   userForm: FormGroup;
   users = [
     { id: 1, name: 'User 1' },
     { id: 2, name: 'User 2' },
     { id: 3, name: 'User 3' },
     { id: 4, name: 'User 4' },
-    { id: 5, name: 'User 5' },
+    { id: 5, name: 'User 5' }
   ];
   ethnicOptions = ['Cuban', 'Mexican', 'Puerto Rican'];
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
-      users: this.fb.array([]),
+      users: this.fb.array([])
     });
   }
 
@@ -38,8 +38,8 @@ export class AppComponent implements OnInit {
           ethnicity: [''], // Main question radio button
           ethnicDetails: this.fb.group({
             selectedOptions: [[]], // Array to store selected options
-            other: [''], // Textbox for 'Other'
-          }),
+            other: [''] // Textbox for 'Other'
+          })
         })
       );
     });
@@ -65,9 +65,7 @@ export class AppComponent implements OnInit {
     if (isChecked) {
       selectedOptions.setValue([...selectedOptions.value, option]);
     } else {
-      selectedOptions.setValue(
-        selectedOptions.value.filter((o: string) => o !== option)
-      );
+      selectedOptions.setValue(selectedOptions.value.filter((o: string) => o !== option));
     }
   }
 
